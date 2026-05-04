@@ -800,6 +800,13 @@ figure {
   min-width: 0;
 }
 
+@media (min-width: 981px) {
+  .bayes-copy {
+    position: sticky;
+    top: 92px;
+  }
+}
+
 .bayes-formula {
   margin-top: 24px;
   padding: 16px;
