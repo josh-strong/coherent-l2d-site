@@ -241,6 +241,20 @@ h1 {
   letter-spacing: 0;
 }
 
+.author-line {
+  max-width: 860px;
+  margin: -8px 0 22px;
+  color: var(--ink-soft);
+  font-size: clamp(1rem, 1.45vw, 1.18rem);
+  font-weight: 640;
+  line-height: 1.45;
+}
+
+.author-line strong {
+  color: var(--ink);
+  font-weight: 900;
+}
+
 h2 {
   max-width: 920px;
   margin-bottom: 14px;
