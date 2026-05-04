@@ -429,6 +429,106 @@
               </ul>
             </article>
           </div>
+
+          <div class="tbp-showcase" aria-labelledby="tbp-showcase-title">
+            <div class="tbp-showcase-copy">
+              <p class="showcase-kicker">Inside TBP + RPO</p>
+              <h3 id="tbp-showcase-title">Coherence is part of the model, not a cleanup step.</h3>
+              <p>
+                TBP starts with ordinary per-node absent, present, and defer scores, then pushes
+                them through a parent-conditioned transition kernel. The forbidden actions are
+                assigned structural zero probability before decoding, while RPO fine-tunes through
+                the same recursion so ancestor decisions learn downstream cost.
+              </p>
+              <div class="tbp-principles" aria-label="TBP methodology summary">
+                <div>
+                  <span>01</span>
+                  <strong>Local primitives</strong>
+                  <p>Every node proposes a ternary action distribution.</p>
+                </div>
+                <div>
+                  <span>02</span>
+                  <strong>Taxonomic gate</strong>
+                  <p>Parent actions mask and renormalize child actions.</p>
+                </div>
+                <div>
+                  <span>03</span>
+                  <strong>Recursive training</strong>
+                  <p>Descendant losses update the ancestor choices that constrain them.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="tbp-visual" aria-label="Taxonomic Belief Propagation visual explanation">
+              <div class="primitive-panel">
+                <span class="visual-label">Local primitive eta_v</span>
+                <div class="prob-row absent">
+                  <span>absent</span>
+                  <b style="--prob-width: 31%">.31</b>
+                </div>
+                <div class="prob-row present">
+                  <span>present</span>
+                  <b style="--prob-width: 46%">.46</b>
+                </div>
+                <div class="prob-row defer">
+                  <span>defer</span>
+                  <b style="--prob-width: 23%">.23</b>
+                </div>
+              </div>
+
+              <div class="tbp-flow" aria-hidden="true">
+                <span></span>
+              </div>
+
+              <div class="kernel-panel">
+                <span class="visual-label">SE transition kernel</span>
+                <div class="kernel-grid" role="img" aria-label="Parent action by child action transition matrix with structural zeros">
+                  <span></span>
+                  <span>child absent</span>
+                  <span>child present</span>
+                  <span>child defer</span>
+                  <span>parent absent</span>
+                  <b class="allowed">1</b>
+                  <b class="zero">0</b>
+                  <b class="zero">0</b>
+                  <span>parent present</span>
+                  <b class="renorm">eta_0</b>
+                  <b class="renorm present-mass">eta_1</b>
+                  <b class="renorm">eta_d</b>
+                  <span>parent defer</span>
+                  <b class="renorm">alpha</b>
+                  <b class="zero emph-zero">0</b>
+                  <b class="renorm">1-alpha</b>
+                </div>
+                <p class="kernel-note">
+                  A deferred parent cannot pass probability mass to a positive child assertion.
+                </p>
+              </div>
+
+              <div class="tbp-taxonomy">
+                <span class="visual-label">Composed handoff</span>
+                <div class="tbp-tree-root defer-node">
+                  Lung opacity
+                  <span>defer</span>
+                </div>
+                <div class="tbp-tree-children">
+                  <div class="tbp-tree-node absent-node">
+                    Edema
+                    <span>allowed absent</span>
+                  </div>
+                  <div class="tbp-tree-node blocked-node">
+                    Consolidation
+                    <span>present zeroed</span>
+                  </div>
+                  <div class="tbp-tree-node defer-node">
+                    Consolidation
+                    <span>defer remains</span>
+                  </div>
+                </div>
+                <p>TBP assigns zero support to incoherent action vectors by construction.</p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
