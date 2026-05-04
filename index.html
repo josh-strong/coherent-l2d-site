@@ -39,10 +39,9 @@
           <p class="eyebrow">Learning to defer / medical imaging / human-AI handoff</p>
           <h1 id="hero-title">Coherent hierarchical multi-label learning to defer for medical imaging</h1>
           <p class="lead">
-            Learning to defer should tell a reader exactly what the model has asserted, what it
-            has ruled out, and what it has delegated. In medical taxonomies, independent
-            per-label defer decisions can be accurate locally while producing an incoherent
-            handoff globally.
+            Hierarchical L2D must specify which findings the model predicts, excludes, and
+            delegates. In medical taxonomies, independent per-label defer decisions can satisfy
+            local losses while yielding an incoherent global action vector.
           </p>
 
           <div class="hero-actions" aria-label="Project links">
@@ -220,7 +219,7 @@
       <section class="section-band muted" id="bayes">
         <div class="container bayes-layout">
           <div class="bayes-copy">
-            <p class="eyebrow">Bayes rule novelty</p>
+            <p class="eyebrow">Bayes-optimal deferral</p>
             <h2>The optimal defer decision is no longer nodewise.</h2>
             <p>
               Flat L2D compares the model and expert separately at each label. In a taxonomy,
@@ -386,10 +385,10 @@
         <div class="container">
           <div class="section-heading">
             <p class="eyebrow">Methods</p>
-            <h2>Two contract-aware operating points.</h2>
+            <h2>Two contract-aware estimators.</h2>
             <p>
-              The paper offers a conservative retrofit for existing models and a faster learned
-              policy for repeated deployment-time inference.
+              We use exact coherent projection for trained BR-L2D models and TBP+RPO for
+              learned structured inference.
             </p>
           </div>
 
@@ -407,7 +406,7 @@
               <ul class="check-list">
                 <li>Inference-only repair for existing local L2D models</li>
                 <li>Exact MAP over the Selective-Exclusion coherent action set</li>
-                <li>Best when deterministic contract compliance is required</li>
+                <li>Use when deterministic contract compliance is required</li>
               </ul>
             </article>
 
@@ -423,9 +422,9 @@
                 recursion used at inference.
               </p>
               <ul class="check-list">
-                <li>Joint action model with coherent support by construction</li>
+                <li>TBP joint model has coherent support under SE</li>
                 <li>Ancestor decisions learn downstream costs during Stage II training</li>
-                <li>Preferred fast operating point when near-zero incoherence is acceptable</li>
+                <li>Fast marginal decoder for repeated inference</li>
               </ul>
             </article>
           </div>
@@ -433,12 +432,12 @@
           <div class="tbp-showcase" aria-labelledby="tbp-showcase-title">
             <div class="tbp-showcase-copy">
               <p class="showcase-kicker">Inside TBP + RPO</p>
-              <h3 id="tbp-showcase-title">Coherence is part of the model, not a cleanup step.</h3>
+              <h3 id="tbp-showcase-title">TBP encodes the SE contract in the transition kernel.</h3>
               <p>
-                TBP starts with ordinary per-node absent, present, and defer scores, then pushes
-                them through a parent-conditioned transition kernel. The forbidden actions are
-                assigned structural zero probability before decoding, while RPO fine-tunes through
-                the same recursion so ancestor decisions learn downstream cost.
+                TBP maps local absent, present, and defer primitives through parent-conditioned
+                transitions. Entries corresponding to forbidden parent-child actions are zero.
+                RPO fine-tunes through the TBP recursion, so descendant losses can update
+                ancestor primitives.
               </p>
               <div class="tbp-principles" aria-label="TBP methodology summary">
                 <div>
@@ -776,10 +775,10 @@
             </article>
             <article>
               <span class="takeaway-number">03</span>
-              <h3>The deployment story is practical.</h3>
+              <h3>The deployment variants are explicit.</h3>
               <p>
-                Projection gives deterministic zero incoherence for safety-critical retrofits.
-                TBP+RPO gives a fast, high-utility policy for repeated inference.
+                Projection is deterministic and exactly coherent at inference. TBP+RPO is the
+                fast marginal policy evaluated in the main experiments.
               </p>
             </article>
           </div>
